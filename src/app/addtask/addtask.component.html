@@ -1,0 +1,53 @@
+
+<div class="container">
+<form #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)"  >
+<table class="table table-{1:striped|sm|bordered|hover|inverse} table-inverse table-responsive table-hover outerborder" 
+
+style="width:300px;">
+<tr>
+    <td colspan="2" style="text-align: center"><h2>Add Task</h2></td>
+</tr>
+  <tr>
+    <td class="form-label">Task</td>
+    <td><input type="text" name="task" #task="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedTask.task" />
+    <input type="hidden" name="task_id" #task_id="ngModel"   [(ngModel)]="this.tmSvc.selectedTask.task_id" />
+    </td>
+  </tr>
+  <tr>
+    <td>Parent</td>
+      <td><select  class="form-control" name="parent_id" #parent_id="ngModel"  [(ngModel)]="this.tmSvc.selectedTask.parent_id">
+          <option value="0"></option>
+          <option *ngFor="let ob of taskdata" [value]='ob.task_id'>{{ob.task}}</option>
+        </select></td>
+  </tr>
+  <tr>
+    <td>Priority</td>
+    <td><input type="range" min="0"  name="priority" #priority="ngModel"  required (input)="priority.value" value="15" max="30" class="form-control" 
+      [(ngModel)]="this.tmSvc.selectedTask.priority" /></td>
+  </tr>
+  <tr>
+    <td>Start Date</td>
+    <td>
+        <div class='input-group date' id='datetimepicker1'>
+            <input type='text' data-date-format="dd/mm/yyyy" name="start_date" class="form-control" required [(ngModel)]="tmSvc.selectedTask.start_date" />
+            <!--<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+            </span>-->
+        </div>
+
+        
+      <!--<input type="date" id="start_date" name="start_date" (ngModelChange)="tmSvc.selectedTask.start_date = $event"
+      #start_date="ngModel"  required class="form-control" (input)="parseDate(tmSvc.selectedTask.start_date)" [(ngModel)]="tmSvc.selectedTask.start_date" />-->
+    </td>
+  </tr>
+  <tr>
+    <td>End Date</td>
+    <td><input type="text" name="end_date" #end_date="ngModel" required class="form-control" 
+       [(ngModel)]="tmSvc.selectedTask.end_date"   /></td>
+  </tr>
+  <tr>
+    <td style="text-align:center" colspan="2"><button class="btn btn-primary" [disabled]="!taskForm.form.valid" >Submit</button></td>
+  </tr>
+</table>
+
+</form>
+</div>
