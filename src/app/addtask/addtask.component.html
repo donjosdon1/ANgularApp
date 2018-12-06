@@ -7,6 +7,38 @@ style="width:300px;">
 <tr>
     <td colspan="2" style="text-align: center"><h2>Add Task</h2></td>
 </tr>
+<tr>
+  <td class="form-label">Project</td>
+  <td><input type="text" name="project" id="project" #project="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedTask.project" />
+  <input type="hidden" name="project_id" id="project_id" #project_id="ngModel"   [(ngModel)]="this.tmSvc.selectedTask.project_id" />
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myProject">...</button>
+<!-- Model window for Project><-->
+<div class="modal" id="myProject">
+  <div class="modal-dialog">
+    <div class="modal-content">    
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Select Project</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>      
+      <!-- Modal body -->
+      <div class="modal-body">        
+        <ul  class="form-control">
+          <li *ngFor="let ob of projectdata" style="color:blue;cursor:pointer" (click)="assignProject(ob)"  attr.data-projectid={{ob.project_id}}>
+            {{ob.project}}          
+        </li>
+        </ul>
+      </div>      
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" id="btnCloseProjectModal" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>      
+    </div>
+  </div>
+</div>
+<!-- Model window for Project><-->
+  </td>
+</tr>
   <tr>
     <td class="form-label">Task</td>
     <td><input type="text" name="task" #task="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedTask.task" />
@@ -14,11 +46,49 @@ style="width:300px;">
     </td>
   </tr>
   <tr>
+      <tr>
+          <td class="form-label">IsParent</td>
+          <td><input type="checkbox" name="isparent" #isparent="ngModel"  class="form-control" [(ngModel)]="tmSvc.selectedTask.isparent" />
+          
+          </td>
+        </tr>
+        <tr>
     <td>Parent</td>
-      <td><select  class="form-control" name="parent_id" #parent_id="ngModel"  [(ngModel)]="this.tmSvc.selectedTask.parent_id">
+      <td>
+       <!-- <select  class="form-control" name="parent_id" #parent_id="ngModel"  [(ngModel)]="this.tmSvc.selectedTask.parent_id">
           <option value="0"></option>
           <option *ngFor="let ob of taskdata" [value]='ob.task_id'>{{ob.task}}</option>
-        </select></td>
+        </select>  -->
+        <input type="text" name="parent_task" id="parent_task" #parent_task="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedTask.parent_task" />
+  <input type="hidden" name="parent_id" id="parent_id" #parent_id="ngModel"   [(ngModel)]="this.tmSvc.selectedTask.parent_id" />
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myParent">...</button>
+<!-- Model window for Parent><-->
+<div class="modal" id="myParent">
+  <div class="modal-dialog">
+    <div class="modal-content">    
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Select Parent</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>      
+      <!-- Modal body -->
+      <div class="modal-body">        
+        <ul  class="form-control">
+          <li *ngFor="let ob of taskdata" style="color:blue;cursor:pointer" (click)="assignParent(ob)"  attr.data-projectid={{ob.parent_id}}>
+            {{ob.task}}          
+        </li>
+        </ul>
+      </div>      
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" id="btnCloseParentModal" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>      
+    </div>
+  </div>
+</div>
+<!-- Model window for Parent><-->
+      
+      </td>
   </tr>
   <tr>
     <td>Priority</td>
@@ -44,10 +114,64 @@ style="width:300px;">
     <td><input type="text" name="end_date" #end_date="ngModel" required class="form-control" 
        [(ngModel)]="tmSvc.selectedTask.end_date"   /></td>
   </tr>
+<tr>
+<td>User</td>
+<td>
+  <input type="text" name="username" id="username" #parent_task="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedTask.username" />
+  <input type="hidden" name="user_id" id="user_id" #user_id="ngModel"   [(ngModel)]="this.tmSvc.selectedTask.user_id" />
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myUser">...</button>
+<!-- Model window for Parent><-->
+<div class="modal" id="myUser">
+  <div class="modal-dialog">
+    <div class="modal-content">    
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Select User</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>      
+      <!-- Modal body -->
+      <div class="modal-body">        
+        <ul  class="form-control">
+          <li *ngFor="let ob of userdata" style="color:blue;cursor:pointer" (click)="assignUser(ob)"  attr.data-projectid={{ob.user_id}}>
+            {{ob.firstname}}    {{ob.lastname}}             
+        </li>
+        </ul>
+      </div>      
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" id="btnCloseUserModal" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>      
+    </div>
+  </div>
+</div>
+<!-- Model window for Parent><-->
+
+
+</td>
+
+</tr>
+
+
+  <tr>
+    <td class="form-label">User</td>
+    <td><input type="text" name="username" #username="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedTask.username" />
+    <input type="hidden" name="user_id" #user_id="ngModel"   [(ngModel)]="this.tmSvc.selectedTask.user_id" />
+    </td>
+  </tr>
   <tr>
     <td style="text-align:center" colspan="2"><button class="btn btn-primary" [disabled]="!taskForm.form.valid" >Submit</button></td>
   </tr>
 </table>
-
+<script type="text/javascript">
+function assignProject(p, id)
+{  
+  document.getElementById('project').value=p;
+  document.getElementById('project_id').value=id;
+}
+</script>
 </form>
+
+
+  
+
 </div>

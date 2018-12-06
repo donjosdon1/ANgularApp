@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import{Taskdetails} from '../Models/taskdetails';
+import {projectdetails} from '../Models/projectdetails';
+import {userdetails} from '../Models/userdetails';
 import {TaskmanagerserviceService} from '../shared/taskmanagerservice.service';
 import { Http } from '@angular/http/src/http';
 import { ActivatedRoute, Params } from '@angular/router'; 
 import { NgForm } from '@angular/forms';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-addtask',
@@ -22,14 +25,17 @@ priority:number;
 taskended:number;
 taskdata:Taskdetails[];
 edittaskdata:Taskdetails[];
+projectdata:projectdetails[];
 newTask:Taskdetails=new Taskdetails();
-
+userdata:userdetails[];
 id:number;
   constructor(public tmSvc:TaskmanagerserviceService,private _activeRoute:ActivatedRoute) { }
 
   ngOnInit() {
     this.resetForm();
-    this.tmSvc.GetAllTasks().subscribe(p=>this.taskdata=p);
+    this.tmSvc.GetAllTasks().subscribe(p=>this.taskdata=p);//tasks
+    this.tmSvc.GetAllProjects().subscribe(p=>this.projectdata=p);//projects
+    this.tmSvc.GetAllUsers().subscribe(p=>this.userdata=p);//users
     this.id = this._activeRoute.snapshot.params['id'];
     if(this.id!=null)
     {
@@ -62,7 +68,12 @@ id:number;
       start_date:null,
       end_date:null,
       priority:0,
-      taskended:0
+      taskended:0,
+      project_id:0,
+      user_id:0,
+      project:'',
+      username:'',
+      isparent:false
     }
   }
 
@@ -77,6 +88,11 @@ id:number;
     this.newTask.start_date=t.start_date;
     this.newTask.end_date=t.end_date;
     this.newTask.taskended=0;
+    this.newTask.project_id=t.project_id;
+    this.newTask.user_id=t.user_id;
+    this.newTask.username=t.username;
+    this.newTask.project=t.project;
+    this.newTask.isparent=t.isparent;    
     this.tmSvc.Add(this.newTask).subscribe(res=>  
       {  
         this.taskdata.push(res);  
@@ -111,6 +127,26 @@ id:number;
     } else {
         return null;
     }
+}
+assignProject(p:projectdetails)
+{
+  this.tmSvc.selectedTask.project=p.project;
+  this.tmSvc.selectedTask.project_id=p.project_id;
+  document.getElementById("btnCloseProjectModal").click;
+}
+assignParent(p:Taskdetails)
+{
+  //debugger;
+  this.tmSvc.selectedTask.parent_task=p.task;
+  this.tmSvc.selectedTask.parent_id=p.task_id;
+  document.getElementById("btnCloseParentModal").click;  
+}
+assignUser(p:userdetails)
+{
+  //debugger;
+  this.tmSvc.selectedTask.username = p.firstname + " " + p.lastname;
+  this.tmSvc.selectedTask.user_id=p.user_id;
+  document.getElementById("btnCloseUserModal").click;  
 }
 
 }

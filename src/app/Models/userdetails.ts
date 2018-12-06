@@ -1,6 +1,8 @@
 export class userdetails{
-    userId:number;
-    id:number;
-    title:string;
-    body:string;
+    user_id:number;
+    firstname:string;
+    lastname:string;
+    employee_id:string;
+    project_id:number;
+    task_id:number;
 }

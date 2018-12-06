@@ -9,11 +9,13 @@ import { TaskmanagerserviceService } from './shared/taskmanagerservice.service';
 import { AddtaskComponent } from './addtask/addtask.component';
 import { HttpClientModule } from '@angular/common/http'; 
 import { routing } from './app.routing';
+import { AdduserComponent } from './adduser/adduser.component';
 @NgModule({
   declarations: [
     AppComponent,
     TaskmanagerComponent,
     AddtaskComponent,
+    AdduserComponent,
   ],
   imports: [
     BrowserModule,HttpModule,FormsModule,HttpClientModule,routing,FormsModule
