@@ -11,6 +11,7 @@ import {map} from 'rxjs/operators';
 @Injectable()
 export class TaskmanagerserviceService {
   selectedTask:Taskdetails;
+  selectedUser:userdetails;
 getURL:string = "http://localhost/TaskManagerWebApi/api/GetAllTasksJoin";
 saveURL:string = "http://localhost/TaskManagerWebApi/api/AddTaskwithParent";
 editURL:string = "http://localhost/TaskManagerWebApi/api/EditTask";
@@ -19,6 +20,8 @@ endTaskURL:string = "http://localhost/TaskManagerWebApi/api/EndTask/";
 getProjectURL:string = "http://localhost/TaskManagerWebApi/api/GetAllProjects";
 getUserURL:string = "http://localhost/TaskManagerWebApi/api/GetAllUsers";
 addUserURL:string = "http://localhost/TaskManagerWebApi/api/adduser";
+editUserURL:string = "http://localhost/TaskManagerWebApi/api/edituser";
+getUserByID:string = "http://localhost/TaskManagerWebApi/api/GetUser/";
   constructor(private http:HttpClient,private httpget:Http) { }
   GetAllTasks():Observable<Taskdetails[]>
   {
@@ -63,20 +66,27 @@ EndTask(task_id:number) :Observable<string>
   return this.httpget.get(this.endTaskURL + task_id )
     .pipe(map((data:Response)=><string>data.json()));        
 }
-user_id:number;
-    firstname:string;
-    lastname:string;
-    employee_id:string;
-    project_id:number;
-    task_id:number;
+///////////////////User
 AddUser(user:userdetails)  
 { debugger;
   const headers = new HttpHeaders().set('content-type', 'application/json');  
   var body = {user_id:0, firstname:user.firstname, lastname:user.lastname, employee_id:user.employee_id, 
-    project_id:user.project_id ,task_id:user.task_id}  
+    project_id:0 ,task_id:0}  
   console.log(body);
-return this.http.post<Taskdetails>(this.addUserURL,body,{headers})  
+return this.http.post<userdetails>(this.addUserURL,body,{headers})  
   
+}
+EditUser(user:userdetails)  
+{ 
+  const headers = new HttpHeaders().set('content-type', 'application/json');  
+  var body = {user_id:user.user_id , firstname:user.firstname, lastname:user.lastname, employee_id:user.employee_id, 
+    project_id:user.project_id ,task_id:user.task_id}    
+return this.http.post<userdetails>(this.editUserURL,body,{headers})    
+}
+GetUserByID(user_id:number):Observable<userdetails[]>
+{
+  return this.httpget.get(this.getUserByID + user_id )
+  .pipe(map((data:Response)=><userdetails[]>data.json()));    
 }
 
 }

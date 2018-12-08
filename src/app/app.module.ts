@@ -10,12 +10,14 @@ import { AddtaskComponent } from './addtask/addtask.component';
 import { HttpClientModule } from '@angular/common/http'; 
 import { routing } from './app.routing';
 import { AdduserComponent } from './adduser/adduser.component';
+import { ViewusersComponent } from './viewusers/viewusers.component';
 @NgModule({
   declarations: [
     AppComponent,
     TaskmanagerComponent,
     AddtaskComponent,
     AdduserComponent,
+    ViewusersComponent,
   ],
   imports: [
     BrowserModule,HttpModule,FormsModule,HttpClientModule,routing,FormsModule

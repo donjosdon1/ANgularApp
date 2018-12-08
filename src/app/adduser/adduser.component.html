@@ -1,3 +1,32 @@
-<p>
-  adduser works!
-</p>
+
+<div class="container">
+  <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)"  >
+  <table class="table table-{1:striped|sm|bordered|hover|inverse} table-inverse table-responsive table-hover outerborder" style="width:300px;">
+  <tr>
+      <td colspan="2" style="text-align: center"><h2>Add User</h2></td>
+  </tr>
+  
+    <tr>
+      <td class="form-label">First Name</td>
+      <td><input type="text" name="firstname" #firstname="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedUser.firstname" />
+      <input type="hidden" name="user_id" #task_id="ngModel"   [(ngModel)]="this.tmSvc.selectedUser.user_id" />
+      </td>
+    </tr>
+    <tr>
+      <td class="form-label">Last Name</td>
+      <td><input type="text" name="lastname" #firstname="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedUser.lastname" />      
+      </td>
+    </tr>
+    <tr>
+      <td class="form-label">EmployeeID</td>
+      <td><input type="text" name="employee_id" #firstname="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedUser.employee_id" />      
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:center" colspan="2"><button class="btn btn-primary" [disabled]="!userForm.form.valid" >Submit</button></td>
+    </tr>
+  </table>
+
+  </form>
+  
+  </div>
