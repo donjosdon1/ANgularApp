@@ -1,0 +1,92 @@
+
+<div class="container">
+  <form #projectForm="ngForm" (ngSubmit)="onSubmit(projectForm)"  >
+  <table class="table table-{1:striped|sm|bordered|hover|inverse} table-inverse table-responsive table-hover outerborder" 
+  style="width:450px;">
+  <tr>
+      <td colspan="2" style="text-align: center"><h2>Add Project</h2></td>
+  </tr>
+  <tr>
+    <td class="form-label">Project</td>
+    <td><input type="text" name="project" id="project" #project="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedProject.project" />
+    <input type="hidden" name="project_id" id="project_id" #project_id="ngModel"   [(ngModel)]="this.tmSvc.selectedProject.project_id" />
+  
+  <!-- Model window for Project><-->
+    </td>
+  </tr>    
+          
+    <tr>
+      <td>Priority</td>
+      <td><input type="range" min="0"  name="priority" #priority="ngModel"  required (input)="priority.value" value="15" max="30" class="form-control" 
+        [(ngModel)]="this.tmSvc.selectedProject.priority" /></td>
+    </tr>
+    <tr>
+      <td>Start Date</td>
+      <td>
+       <!--   <div class='input-group date' id='datetimepicker1'>
+              <input type='text' data-date-format="dd/mm/yyyy" name="start_date" class="form-control" required [(ngModel)]="tmSvc.selectedTask.start_date" />
+              <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+              </span>
+          </div>   -->
+        <input type="date" id="startdate" data-date-format="dd/mm/yyyy"  name="startdate" (ngModelChange)="tmSvc.selectedProject.startdate = $event"
+        #startdate="ngModel"  required class="form-control" (input)="parseDate(tmSvc.selectedProject.startdate)" 
+        [(ngModel)]="tmSvc.selectedProject.startdate" />
+      </td>
+    </tr>
+    <tr>
+      <td>End Date</td>
+      <td>
+        <!--<input type="text" name="enddate" #enddate="ngModel" required class="form-control" 
+         [(ngModel)]="tmSvc.selectedProject.enddate"   /></td>-->
+         <input type="date" id="enddate" data-date-format="dd/mm/yyyy"  name="enddate" (ngModelChange)="tmSvc.selectedProject.enddate = $event"
+        #startdate="ngModel"  required class="form-control" (input)="parseDate(tmSvc.selectedProject.enddate)" 
+        [(ngModel)]="tmSvc.selectedProject.enddate" />
+    </tr>
+  <tr>
+  <td>User</td>
+  <td>
+    <input type="text" name="username" id="username" #parent_task="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedProject.username" />
+    <input type="hidden" name="user_id" id="user_id" #user_id="ngModel"   [(ngModel)]="this.tmSvc.selectedProject.user_id" />
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myUser">...</button>
+  <!-- Model window for Parent><-->
+  <div class="modal" id="myUser">
+    <div class="modal-dialog">
+      <div class="modal-content">    
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Select User</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>      
+        <!-- Modal body -->
+        <div class="modal-body">        
+          <ul  class="form-control">
+            <li *ngFor="let ob of userdata" style="color:blue;cursor:pointer" (click)="assignUser(ob)"  attr.data-projectid={{ob.user_id}}>
+              {{ob.firstname}}    {{ob.lastname}}             
+          </li>
+          </ul>
+        </div>      
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" id="btnCloseUserModal" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>      
+      </div>
+    </div>
+  </div>
+  <!-- Model window for Parent><-->
+  
+  
+  </td>
+  
+  </tr>
+  
+    <tr>
+      <td style="text-align:center" colspan="2"><button class="btn btn-primary" [disabled]="!projectForm.form.valid" >Submit</button></td>
+    </tr>
+  </table>
+
+  </form>
+  
+  
+    
+  
+  </div>

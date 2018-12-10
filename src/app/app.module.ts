@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { routing } from './app.routing';
 import { AdduserComponent } from './adduser/adduser.component';
 import { ViewusersComponent } from './viewusers/viewusers.component';
+import { AddprojectComponent } from './addproject/addproject.component';
+import { ViewprojectsComponent } from './viewprojects/viewprojects.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,6 +20,8 @@ import { ViewusersComponent } from './viewusers/viewusers.component';
     AddtaskComponent,
     AdduserComponent,
     ViewusersComponent,
+    AddprojectComponent,
+    ViewprojectsComponent,
   ],
   imports: [
     BrowserModule,HttpModule,FormsModule,HttpClientModule,routing,FormsModule

@@ -24,9 +24,9 @@
 <table class="table table-{1:striped|sm|bordered|hover|inverse} table-inverse table-responsive table-hover outerborder" style="display: table;">
 <thead class="thead-inverse|thead-default">
   <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Employee ID</th>      
+      <th>First Name <span class="btn btn-info" (click)='sortbyfname("asc")' >^</span> <span style="margin-left:5px;" class="btn btn-info" (click)='sortbyfname("desc")'>v</span> </th>
+      <th>Last Name <span class="btn btn-info"  (click)='sortbylname("asc")' >^</span> <span style="margin-left:5px;" class="btn btn-info"  (click)='sortbylname("desc")' >v</span> </th>
+      <th>Employee ID <span class="btn btn-info"  (click)='sortbyempid("asc")' >^</span> <span style="margin-left:5px;" class="btn btn-info" (click)='sortbyempid("desc")'>v</span> </th>      
       <th></th>
       <th></th>
   </tr>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Taskdetails} from '../Models/taskdetails';
 import {projectdetails} from '../Models/projectdetails';
+import {projects} from '../Models/projects';
 import {userdetails} from '../Models/userdetails';
 import {Observable} from 'rxjs'
 import {Http,Response} from '@angular/http';
@@ -8,10 +9,12 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 //import 'rxjs/add/operator/map';
 //import './rxjs-operators';
 import {map} from 'rxjs/operators';
+
 @Injectable()
 export class TaskmanagerserviceService {
   selectedTask:Taskdetails;
   selectedUser:userdetails;
+  selectedProject:projectdetails;
 getURL:string = "http://localhost/TaskManagerWebApi/api/GetAllTasksJoin";
 saveURL:string = "http://localhost/TaskManagerWebApi/api/AddTaskwithParent";
 editURL:string = "http://localhost/TaskManagerWebApi/api/EditTask";
@@ -22,16 +25,20 @@ getUserURL:string = "http://localhost/TaskManagerWebApi/api/GetAllUsers";
 addUserURL:string = "http://localhost/TaskManagerWebApi/api/adduser";
 editUserURL:string = "http://localhost/TaskManagerWebApi/api/edituser";
 getUserByID:string = "http://localhost/TaskManagerWebApi/api/GetUser/";
+getProjectByID:string = "http://localhost/TaskManagerWebApi/api/GetProjectByID/";
+addProjectURL:string = "http://localhost/TaskManagerWebApi/api/addproject";
+editProjectURL:string = "http://localhost/TaskManagerWebApi/api/editproject";
+
   constructor(private http:HttpClient,private httpget:Http) { }
   GetAllTasks():Observable<Taskdetails[]>
   {
     return this.httpget.get(this.getURL)
     .pipe(map((data:Response)=><Taskdetails[]>data.json()))
   }
-  GetAllProjects():Observable<projectdetails[]>
+  GetAllProjects():Observable<projects[]>
   {
     return this.httpget.get(this.getProjectURL)
-    .pipe(map((data:Response)=><projectdetails[]>data.json()))
+    .pipe(map((data:Response)=><projects[]>data.json()))
   }
   GetAllUsers():Observable<userdetails[]>
   {
@@ -42,6 +49,11 @@ getUserByID:string = "http://localhost/TaskManagerWebApi/api/GetUser/";
   {
     return this.httpget.get(this.getURLByID + task_id )
     .pipe(map((data:Response)=><Taskdetails[]>data.json()));    
+  }
+  GetProjectByID(project_id:number):Observable<projectdetails[]>
+  {
+    return this.httpget.get(this.getProjectByID + project_id )
+    .pipe(map((data:Response)=><projectdetails[]>data.json()));    
   }
   Add(task:Taskdetails)  
 { debugger;
@@ -87,6 +99,27 @@ GetUserByID(user_id:number):Observable<userdetails[]>
 {
   return this.httpget.get(this.getUserByID + user_id )
   .pipe(map((data:Response)=><userdetails[]>data.json()));    
+}
+
+
+
+////Project
+AddProject(p:projectdetails)  
+{ debugger;
+  const headers = new HttpHeaders().set('content-type', 'application/json');  
+  var body = {project_id:0, project:p.project, startdate:p.startdate, enddate:p.enddate,
+  priority:p.priority, user_id:p.user_id, username:p.username }  
+  console.log(body);
+return this.http.post<projectdetails>(this.addProjectURL,body,{headers})
+}
+EditProject(p:projectdetails)  
+{ debugger;
+  const headers = new HttpHeaders().set('content-type', 'application/json');  
+  var body = {project_id:p.project_id, project:p.project, start_date:p.startdate, end_date:p.enddate,
+  priority:p.priority, user_id:p.user_id, username:p.username }  
+  console.log(body);
+return this.http.post<projectdetails>(this.editProjectURL,body,{headers})  
+  
 }
 
 }

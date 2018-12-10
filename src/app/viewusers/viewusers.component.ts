@@ -55,5 +55,25 @@ employee_id:string;
   {
     this._router.navigate(['edituser' , obj.user_id ]);
   }
-
+  sortbyfname(t:string)
+  {
+    if(t=='asc')
+    this.userdata = this.userdata.sort((a,b)=>a.firstname.localeCompare(b.firstname));
+    else
+    this.userdata = this.userdata.sort((a,b)=>b.firstname.localeCompare(a.firstname));
+  }
+  sortbylname(t:string)
+  {
+    if(t=='asc')
+    this.userdata = this.userdata.sort((a,b)=>a.lastname.localeCompare(b.lastname));
+    else
+    this.userdata = this.userdata.sort((a,b)=>b.lastname.localeCompare(a.lastname));
+  }
+  sortbyempid(t:string)
+  {
+    if(t=='asc')
+    this.userdata = this.userdata.sort((a,b)=>a.employee_id.localeCompare(b.employee_id));
+    else
+    this.userdata = this.userdata.sort((a,b)=>b.employee_id.localeCompare(a.employee_id));
+  }
 }

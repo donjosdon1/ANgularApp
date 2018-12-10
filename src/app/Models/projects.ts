@@ -1,9 +1,9 @@
-export class projectdetails {
+export class projects {
     project_id:number;
     project:string;
     startdate:Date;
     enddate:Date;
     priority:number;
-    user_id:number;
-    username:string;
+    numberoftasks:number;
+    completed:string;
 }

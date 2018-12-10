@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import{Taskdetails} from '../Models/taskdetails';
 import {projectdetails} from '../Models/projectdetails';
-import {projects} from '../Models/projects';
 import {userdetails} from '../Models/userdetails';
 import {TaskmanagerserviceService} from '../shared/taskmanagerservice.service';
 import { Http } from '@angular/http/src/http';
@@ -10,12 +9,12 @@ import { NgForm } from '@angular/forms';
 import { debug } from 'util';
 
 @Component({
-  selector: 'app-addtask',
-  templateUrl: './addtask.component.html',
-  styleUrls: ['./addtask.component.css'],
+  selector: 'app-addproject',
+  templateUrl: './addproject.component.html',
+  styleUrls: ['./addproject.component.css'],
   providers:[TaskmanagerserviceService],
 })
-export class AddtaskComponent implements OnInit {
+export class AddprojectComponent implements OnInit {
 task_id:number;
 parent_id:number;
 task:string;
@@ -25,78 +24,68 @@ end_date:string;
 priority:number;
 taskended:number;
 taskdata:Taskdetails[];
-edittaskdata:Taskdetails[];
-projectdata:projects[];
-newTask:Taskdetails=new Taskdetails();
+editprojectdata:projectdetails[];
+projectdata:projectdetails[];
+newProject:projectdetails=new projectdetails();
 userdata:userdetails[];
 id:number;
   constructor(public tmSvc:TaskmanagerserviceService,private _activeRoute:ActivatedRoute) { }
 
   ngOnInit() {
     this.resetForm();
-    this.tmSvc.GetAllTasks().subscribe(p=>this.taskdata=p);//tasks
-    this.tmSvc.GetAllProjects().subscribe(p=>this.projectdata=p);//projects
+    /*this.tmSvc.GetAllTasks().subscribe(p=>this.taskdata=p);//tasks
+    this.tmSvc.GetAllProjects().subscribe(p=>this.projectdata=p);//projects*/
     this.tmSvc.GetAllUsers().subscribe(p=>this.userdata=p);//users
     this.id = this._activeRoute.snapshot.params['id'];
     if(this.id!=null)
     {
-      this.tmSvc.GetTaskByID(this.id).subscribe(p=>
+      this.tmSvc.GetProjectByID(this.id).subscribe(p=>
         {
-        this.edittaskdata=p;
-        this.tmSvc.selectedTask=this.edittaskdata[0];    
+        this.editprojectdata=p;
+        this.tmSvc.selectedProject=this.editprojectdata[0];    
         //remove the current task from parent task list
-        this.taskdata=this.taskdata.filter(item=> item.task_id != this.id );
+        //this.projectdata=this.taskdata.filter(item=> item.task_id != this.id );
         }
       );
     }
-        
+       
     
   }
   resetForm(form?: NgForm) {
     if (form != null)
       form.reset();      
-      if(this.tmSvc.selectedTask!=null &&  this.tmSvc.selectedTask.task_id!=null)
+      if(this.tmSvc.selectedProject!=null &&  this.tmSvc.selectedProject.project_id!=null)
       {
-        alert(this.tmSvc.selectedTask.task_id);
+        alert(this.tmSvc.selectedProject.project_id);
       }
       else
       {
-    this.tmSvc.selectedTask = {
-      task_id:0,
-      parent_id:0,
-      task:'',
-      parent_task:'',
-      start_date:null,
-      end_date:null,
-      priority:0,
-      taskended:0,
-      project_id:0,
-      user_id:0,
-      project:'',
-      username:'',
-      isparent:false
+    this.tmSvc.selectedProject = {
+    project_id:0,
+    project:'',
+    startdate:null,
+    enddate:null,
+    priority:0,
+    user_id:0,
+    username:''
     }
   }
 
   }
-  Add(t:Taskdetails)
-  {
-    if(t!=undefined)
+  AddProject(p:projectdetails)
+  {debugger;
+    if(p!=undefined)
     {
-    this.newTask.task=t.task;
-    this.newTask.parent_id=(t.parent_id==0?null:t.parent_id);
-    this.newTask.priority=t.priority;
-    this.newTask.start_date=t.start_date;
-    this.newTask.end_date=t.end_date;
-    this.newTask.taskended=0;
-    this.newTask.project_id=t.project_id;
-    this.newTask.user_id=t.user_id;
-    this.newTask.username=t.username;
-    this.newTask.project=t.project;
-    this.newTask.isparent=t.isparent;    
-    this.tmSvc.Add(this.newTask).subscribe(res=>  
+    this.newProject.enddate=p.enddate;
+    this.newProject.priority = p.priority;
+    this.newProject.project = p.project;
+    this.newProject.project_id = p.project_id;
+    this.newProject.startdate = p.startdate;
+    this.newProject.user_id = p.user_id;
+    
+    this.tmSvc.AddProject(this.newProject).subscribe(res=>  
       {  
-        this.taskdata.push(res);  
+        this.projectdata.push(res);  
         alert("Data added successfully !! ")          
       })  
       ,err=>  
@@ -106,15 +95,15 @@ id:number;
     }
   }
   onSubmit(form: NgForm) {
-    if (form.value.task_id == 0) {
-      this.tmSvc.Add(form.value)
+    if (form.value.project_id != undefined &&  form.value.project_id == 0) {
+      this.tmSvc.AddProject(form.value)
         .subscribe(data => {
           this.resetForm(form);      
           alert('Data added successfully!!');       
         })
     }
     else {
-      this.tmSvc.Edit(form.value)
+      this.tmSvc.EditProject(form.value)
       .subscribe(data => {
         this.resetForm(form);
         alert('Data updated successfully!!');        
@@ -145,9 +134,10 @@ assignParent(p:Taskdetails)
 assignUser(p:userdetails)
 {
   //debugger;
-  this.tmSvc.selectedTask.username = p.firstname + " " + p.lastname;
-  this.tmSvc.selectedTask.user_id=p.user_id;
+  this.tmSvc.selectedProject.username = p.firstname + " " + p.lastname;
+  this.tmSvc.selectedProject.user_id=p.user_id;
   document.getElementById("btnCloseUserModal").click;  
 }
 
 }
+

@@ -3,7 +3,9 @@ import {Routes, RouterModule} from '@angular/router';
 import {TaskmanagerComponent} from './taskmanager/taskmanager.component';
 import {AddtaskComponent} from './addtask/addtask.component';
 import {AdduserComponent} from './adduser/adduser.component';
+import {AddprojectComponent} from './addproject/addproject.component';
 import {ViewusersComponent} from './viewusers/viewusers.component';
+import {ViewprojectsComponent} from './viewprojects/viewprojects.component';
 import {AppComponent} from './app.component';
  
 const appRoutes : Routes =
@@ -19,6 +21,10 @@ const appRoutes : Routes =
     {
       path: 'viewuser',
       component: ViewusersComponent
+    },
+    {
+      path: 'viewproject',
+      component: ViewprojectsComponent
     },
     {
       path: 'add',
@@ -45,6 +51,19 @@ const appRoutes : Routes =
     {
         path: 'edituser/:id',
         component: AdduserComponent,
+    },
+    {
+      path: 'editproject',
+      component: AddprojectComponent,
+ 
+    },
+    {
+        path: 'editproject/:id',
+        component: AddprojectComponent,
+    },
+    {
+      path: 'addproject',
+      component: AddprojectComponent,
     },
     {
       path: '**',
