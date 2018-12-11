@@ -62,6 +62,13 @@ editProjectURL:string = "http://localhost/TaskManagerWebApi/api/editproject";
   start_date:task.start_date,end_date:task.end_date,
     priority:task.priority,taskended:0, project_id:task.project_id, user_id:task.user_id,
     project:task.project,username:task.username,isparent:task.isparent==true?1:0 }  
+    if(task.isparent)
+    {
+      body= {task_id:0, parent_task:'', parent_id:0, task:task.task, 
+      start_date:null,end_date:null,
+        priority:0,taskended:0, project_id:task.project_id, user_id:null,
+        project:task.project,username:'',isparent:task.isparent==true?1:0 }; 
+    }
   console.log(body);
 return this.http.post<Taskdetails>(this.saveURL,body,{headers})  
   
@@ -71,6 +78,12 @@ Edit(task:Taskdetails)
   const headers = new HttpHeaders().set('content-type', 'application/json');  
   var body = {task_id:task.task_id, parent_id:task.parent_id, task:task.task, start_date:task.start_date,
     end_date:task.end_date,priority:task.priority,taskended:0, project_id:task.project_id, user_id:task.user_id}    
+if(task.isparent)
+{
+  body = {task_id:task.task_id, parent_id:null, task:task.task, start_date:null,
+    end_date:null,priority:null,taskended:0, project_id:task.project_id, user_id:null}   
+}
+
 return this.http.post<Taskdetails>(this.editURL,body,{headers})    
 }
 EndTask(task_id:number) :Observable<string> 

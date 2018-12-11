@@ -44,7 +44,7 @@
     </tr>
   <tr>
   <td>User</td>
-  <td>
+  <td style="display:flex">
     <input type="text" name="username" id="username" #parent_task="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedProject.username" />
     <input type="hidden" name="user_id" id="user_id" #user_id="ngModel"   [(ngModel)]="this.tmSvc.selectedProject.user_id" />
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myUser">...</button>

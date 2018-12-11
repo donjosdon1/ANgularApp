@@ -8,7 +8,7 @@ style="width:350px;">
 </tr>
 <tr>
   <td class="form-label">Project</td>
-  <td><input type="text" name="project" id="project" #project="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedTask.project" />
+  <td style="display: flex;"><input type="text" name="project" disabled="disabled" id="project" #project="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedTask.project" />
   <input type="hidden" name="project_id" id="project_id" #project_id="ngModel"   [(ngModel)]="this.tmSvc.selectedTask.project_id" />
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myProject">...</button>
 <!-- Model window for Project><-->
@@ -44,21 +44,21 @@ style="width:350px;">
     <input type="hidden" name="task_id" #task_id="ngModel"   [(ngModel)]="this.tmSvc.selectedTask.task_id" />
     </td>
   </tr>
-  <tr>
-      <tr>
+  <tr>     
           <td class="form-label">IsParent</td>
-          <td><input type="checkbox" name="isparent" #isparent="ngModel"  class="form-control" [(ngModel)]="tmSvc.selectedTask.isparent" />
+          <td><input type="checkbox" name="isparent" id="isparent" #isparent="ngModel" (change)="parentselected($event)"  class="form-control" 
+            [(ngModel)]="tmSvc.selectedTask.isparent" />
           
           </td>
-        </tr>
-        <tr>
+</tr>
+ <tr id="trparent">
     <td>Parent</td>
-      <td>
+      <td  style="display: flex;">
        <!-- <select  class="form-control" name="parent_id" #parent_id="ngModel"  [(ngModel)]="this.tmSvc.selectedTask.parent_id">
           <option value="0"></option>
           <option *ngFor="let ob of taskdata" [value]='ob.task_id'>{{ob.task}}</option>
         </select>  -->
-        <input type="text" name="parent_task" id="parent_task" #parent_task="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedTask.parent_task" />
+        <input type="text" name="parent_task" disabled="disabled"  id="parent_task" #parent_task="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedTask.parent_task" />
   <input type="hidden" name="parent_id" id="parent_id" #parent_id="ngModel"   [(ngModel)]="this.tmSvc.selectedTask.parent_id" />
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myParent">...</button>
 <!-- Model window for Parent><-->
@@ -89,12 +89,12 @@ style="width:350px;">
       
       </td>
   </tr>
-  <tr>
+  <tr  id="trpriority">
     <td>Priority</td>
     <td><input type="range" min="0"  name="priority" #priority="ngModel"  required (input)="priority.value" value="15" max="30" class="form-control" 
       [(ngModel)]="this.tmSvc.selectedTask.priority" /></td>
   </tr>
-  <tr>
+  <tr  id="trstartdate">
     <td>Start Date</td>
     <td>
         <div class='input-group date' id='datetimepicker1'>
@@ -108,15 +108,15 @@ style="width:350px;">
       #start_date="ngModel"  required class="form-control" (input)="parseDate(tmSvc.selectedTask.start_date)" [(ngModel)]="tmSvc.selectedTask.start_date" />-->
     </td>
   </tr>
-  <tr>
+  <tr  id="trenddate">
     <td>End Date</td>
     <td><input type="text" name="end_date" #end_date="ngModel" required class="form-control" 
        [(ngModel)]="tmSvc.selectedTask.end_date"   /></td>
   </tr>
-<tr>
+<tr  id="truser">
 <td>User</td>
-<td>
-  <input type="text" name="username" id="username" #parent_task="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedTask.username" />
+<td style="display: flex;">
+  <input type="text" name="username" id="username" disabled="disabled"  #parent_task="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedTask.username" />
   <input type="hidden" name="user_id" id="user_id" #user_id="ngModel"   [(ngModel)]="this.tmSvc.selectedTask.user_id" />
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myUser">...</button>
 <!-- Model window for Parent><-->

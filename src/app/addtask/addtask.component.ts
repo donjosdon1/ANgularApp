@@ -149,5 +149,24 @@ assignUser(p:userdetails)
   this.tmSvc.selectedTask.user_id=p.user_id;
   document.getElementById("btnCloseUserModal").click;  
 }
+parentselected(e)
+{
+  if(e.target.checked)
+  {
+    document.getElementById('trparent').style.display='none';
+    document.getElementById('trpriority').style.display='none';
+    document.getElementById('trstartdate').style.display='none';
+    document.getElementById('trenddate').style.display='none';
+    document.getElementById('truser').style.display='none';
+  }
+  else
+  {
+    document.getElementById('trparent').style.display='';
+    document.getElementById('trpriority').style.display='';
+    document.getElementById('trstartdate').style.display='';
+    document.getElementById('trenddate').style.display='';
+    document.getElementById('truser').style.display='';
+  }
+}
 
 }

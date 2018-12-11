@@ -56,8 +56,8 @@
           <td scope="row">{{obj.project}}</td>
           <td>{{obj.numberoftasks}}</td>
           <td>{{obj.priority}}</td>
-          <td>{{obj.start_date|date:'MM/dd/yyyy'}}</td>
-          <td>{{obj.end_date|date:'MM/dd/yyyy'}}</td>
+          <td>{{obj.startdate|date:'MM/dd/yyyy'}}</td>
+          <td>{{obj.enddate|date:'MM/dd/yyyy'}}</td>
           <td>{{obj.completed}}</td>
           
           <td> <button class="btn btn-primary" id='Edit' (click)="EditProject(obj)" >Edit</button> </td>
