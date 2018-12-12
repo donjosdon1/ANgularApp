@@ -83,5 +83,47 @@ if(this.enddate!=undefined && this.enddate.toString()!="" )
   {
     this._router.navigate(['editproject' , obj.project_id]);
   }
+  sortbyproject(t:string)
+    {
+      if(t=='asc')
+      this.projectdata = this.projectdata.sort((a,b)=>a.project.localeCompare(b.project));
+      else
+      this.projectdata = this.projectdata.sort((a,b)=>b.project.localeCompare(a.project));
+    }
+    sortbynooftasks(t:string)
+    {
+      if(t=='asc')
+      this.projectdata = this.projectdata.sort((a,b)=>a.numberoftasks-b.numberoftasks);
+      else
+      this.projectdata = this.projectdata.sort((a,b)=>b.numberoftasks-a.numberoftasks);
+    }
+    sortbypriority(t:string)
+    {
+      if(t=='asc')
+      this.projectdata = this.projectdata.sort((a,b)=>a.priority-b.priority);
+      else
+      this.projectdata = this.projectdata.sort((a,b)=>b.priority-a.priority);
+    }
+    sortbystartdate(t:string)
+    {
+      if(t=='asc')
+      this.projectdata = this.projectdata.sort((a,b)=>+new Date(a.startdate)  - +new Date(b.startdate));
+      else
+      this.projectdata = this.projectdata.sort((a,b)=>+new Date(b.startdate)  - +new Date(a.startdate));
+    } 
+    sortbyenddate(t:string)
+    {
+      if(t=='asc')
+      this.projectdata = this.projectdata.sort((a,b)=>+new Date(a.enddate)  - +new Date(b.enddate));
+      else
+      this.projectdata = this.projectdata.sort((a,b)=>+new Date(b.enddate)  - +new Date(a.enddate));
+    }
+    sortbycompleted(t:string)
+    {
+      if(t=='asc')
+      this.projectdata = this.projectdata.sort((a,b)=>a.completed.localeCompare(b.completed));
+      else
+      this.projectdata = this.projectdata.sort((a,b)=>b.completed.localeCompare(a.completed));
+    }
 
 }

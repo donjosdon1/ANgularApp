@@ -114,4 +114,39 @@ if(this.enddate!=undefined && this.enddate.toString()!="" )
      return false;
     }
     };
+    sortbytask(t:string)
+    {
+      if(t=='asc')
+      this.taskdata = this.taskdata.sort((a,b)=>a.task.localeCompare(b.task));
+      else
+      this.taskdata = this.taskdata.sort((a,b)=>b.task.localeCompare(a.task));
+    }
+    sortbyparent(t:string)
+    {
+      if(t=='asc')
+      this.taskdata = this.taskdata.sort((a,b)=>a.parent_task.localeCompare(b.parent_task));
+      else
+      this.taskdata = this.taskdata.sort((a,b)=>b.parent_task.localeCompare(a.parent_task));
+    }
+    sortbypriority(t:string)
+    {
+      if(t=='asc')
+      this.taskdata = this.taskdata.sort((a,b)=>a.priority-b.priority);
+      else
+      this.taskdata = this.taskdata.sort((a,b)=>b.priority-a.priority);
+    }
+    sortbystartdate(t:string)
+    {
+      if(t=='asc')
+      this.taskdata = this.taskdata.sort((a,b)=>+new Date(a.start_date)  - +new Date(b.start_date));
+      else
+      this.taskdata = this.taskdata.sort((a,b)=>+new Date(b.start_date)  - +new Date(a.start_date));
+    } 
+    sortbyenddate(t:string)
+    {
+      if(t=='asc')
+      this.taskdata = this.taskdata.sort((a,b)=>+new Date(a.end_date)  - +new Date(b.end_date));
+      else
+      this.taskdata = this.taskdata.sort((a,b)=>+new Date(b.end_date)  - +new Date(a.end_date));
+    }
 }

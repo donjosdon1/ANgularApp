@@ -29,7 +29,7 @@
               </span>
           </div>   -->
         <input type="date" id="startdate" data-date-format="dd/mm/yyyy"  name="startdate" (ngModelChange)="tmSvc.selectedProject.startdate = $event"
-        #startdate="ngModel"  required class="form-control" (input)="parseDate(tmSvc.selectedProject.startdate)" 
+        #startdate="ngModel"  required class="form-control" (input)="(tmSvc.selectedProject.startdate)" 
         [(ngModel)]="tmSvc.selectedProject.startdate" />
       </td>
     </tr>
@@ -39,7 +39,7 @@
         <!--<input type="text" name="enddate" #enddate="ngModel" required class="form-control" 
          [(ngModel)]="tmSvc.selectedProject.enddate"   /></td>-->
          <input type="date" id="enddate" data-date-format="dd/mm/yyyy"  name="enddate" (ngModelChange)="tmSvc.selectedProject.enddate = $event"
-        #startdate="ngModel"  required class="form-control" (input)="parseDate(tmSvc.selectedProject.enddate)" 
+        #startdate="ngModel"  required class="form-control" (input)="(tmSvc.selectedProject.enddate)" 
         [(ngModel)]="tmSvc.selectedProject.enddate" />
     </tr>
   <tr>

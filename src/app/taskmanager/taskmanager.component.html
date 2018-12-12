@@ -41,11 +41,11 @@
 <table class="table table-{1:striped|sm|bordered|hover|inverse} table-inverse table-responsive table-hover outerborder" style="display: table;">
     <thead class="thead-inverse|thead-default">
         <tr>
-            <th>Task</th>
-            <th>Parent</th>
-            <th>Priority</th>
-            <th>Start</th>
-            <th>End</th>
+            <th>Task<span class="btn btn-info" (click)='sortbytask("asc")' >^</span> <span style="margin-left:5px;" class="btn btn-info" (click)='sortbytask("desc")'>v</span></th>
+            <th>Parent<span class="btn btn-info" (click)='sortbyparent("asc")' >^</span> <span style="margin-left:5px;" class="btn btn-info" (click)='sortbyparent("desc")'>v</span></th>
+            <th>Priority<span class="btn btn-info" (click)='sortbypriority("asc")' >^</span> <span style="margin-left:5px;" class="btn btn-info" (click)='sortbypriority("desc")'>v</span></th>
+            <th>Start<span class="btn btn-info" (click)='sortbystartdate("asc")' >^</span> <span style="margin-left:5px;" class="btn btn-info" (click)='sortbystartdate("desc")'>v</span></th>
+            <th>End<span class="btn btn-info" (click)='sortbyenddate("asc")' >^</span> <span style="margin-left:5px;" class="btn btn-info" (click)='sortbyenddate("desc")'>v</span></th>
             <th></th>
             <th></th>
         </tr>
