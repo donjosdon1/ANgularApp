@@ -93,7 +93,9 @@ id:number;
     this.newTask.user_id=t.user_id;
     this.newTask.username=t.username;
     this.newTask.project=t.project;
-    this.newTask.isparent=t.isparent;    
+    this.newTask.isparent=t.isparent;      
+    
+
     this.tmSvc.Add(this.newTask).subscribe(res=>  
       {  
         this.taskdata.push(res);  
@@ -167,6 +169,18 @@ parentselected(e)
     document.getElementById('trenddate').style.display='';
     document.getElementById('truser').style.display='';
   }
+}
+checkRequired()
+{
+  //check mandatory fields
+  debugger;
+  if(this.newTask.project.trim()=="" || this.newTask.task.trim()=="")
+  {    
+    return false;
+  }
+  else
+  return true;
+//
 }
 
 }

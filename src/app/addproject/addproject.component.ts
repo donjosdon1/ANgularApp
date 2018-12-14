@@ -43,12 +43,14 @@ id:number;
         {
         this.editprojectdata=p;
         this.tmSvc.selectedProject=this.editprojectdata[0];    
+        //this.tmSvc.selectedProject.startdate = this.tmSvc.selectedProject.startdate | date:'yyyy-MM-dd';
+
+        //this.tmSvc.selectedProject.startdate = new Date('2017-12-01');
         //remove the current task from parent task list
         //this.projectdata=this.taskdata.filter(item=> item.task_id != this.id );
         }
       );
-    }
-       
+    }      
     
   }
   resetForm(form?: NgForm) {

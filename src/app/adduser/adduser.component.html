@@ -7,18 +7,18 @@
   </tr>
   
     <tr>
-      <td class="form-label">First Name</td>
+      <td class="form-label">First Name<span style="color:red;">*</span></td>
       <td><input type="text" name="firstname" #firstname="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedUser.firstname" />
       <input type="hidden" name="user_id" #task_id="ngModel"   [(ngModel)]="this.tmSvc.selectedUser.user_id" />
       </td>
     </tr>
     <tr>
-      <td class="form-label">Last Name</td>
+      <td class="form-label">Last Name<span style="color:red;">*</span></td>
       <td><input type="text" name="lastname" #firstname="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedUser.lastname" />      
       </td>
     </tr>
     <tr>
-      <td class="form-label">EmployeeID</td>
+      <td class="form-label">EmployeeID<span style="color:red;">*</span></td>
       <td><input type="text" name="employee_id" #firstname="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedUser.employee_id" />      
       </td>
     </tr>

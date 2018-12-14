@@ -7,7 +7,7 @@
       <td colspan="2" style="text-align: center"><h2>Add Project</h2></td>
   </tr>
   <tr>
-    <td class="form-label">Project</td>
+    <td class="form-label">Project<span style="color:red;">*</span></td>
     <td><input type="text" name="project" id="project" #project="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedProject.project" />
     <input type="hidden" name="project_id" id="project_id" #project_id="ngModel"   [(ngModel)]="this.tmSvc.selectedProject.project_id" />
   
@@ -17,7 +17,7 @@
           
     <tr>
       <td>Priority</td>
-      <td><input type="range" min="0"  name="priority" #priority="ngModel"  required (input)="priority.value" value="15" max="30" class="form-control" 
+      <td><input type="range" min="0"  name="priority" #priority="ngModel"   (input)="priority.value" value="15" max="30" class="form-control" 
         [(ngModel)]="this.tmSvc.selectedProject.priority" /></td>
     </tr>
     <tr>
@@ -28,9 +28,9 @@
               <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
               </span>
           </div>   -->
-        <input type="date" id="startdate" data-date-format="dd/mm/yyyy"  name="startdate" (ngModelChange)="tmSvc.selectedProject.startdate = $event"
-        #startdate="ngModel"  required class="form-control" (input)="(tmSvc.selectedProject.startdate)" 
-        [(ngModel)]="tmSvc.selectedProject.startdate" />
+        <input type="date" id="startdate" data-date-format="yyyy/MM/dd"  name="startdate" (ngModelChange)="tmSvc.selectedProject.startdate = $event"
+        #startdate="ngModel"   class="form-control" (input)="(tmSvc.selectedProject.startdate)" 
+        [(ngModel)]="tmSvc.selectedProject.startdate"  />
       </td>
     </tr>
     <tr>
@@ -39,13 +39,13 @@
         <!--<input type="text" name="enddate" #enddate="ngModel" required class="form-control" 
          [(ngModel)]="tmSvc.selectedProject.enddate"   /></td>-->
          <input type="date" id="enddate" data-date-format="dd/mm/yyyy"  name="enddate" (ngModelChange)="tmSvc.selectedProject.enddate = $event"
-        #startdate="ngModel"  required class="form-control" (input)="(tmSvc.selectedProject.enddate)" 
+        #startdate="ngModel"   class="form-control" (input)="(tmSvc.selectedProject.enddate)" 
         [(ngModel)]="tmSvc.selectedProject.enddate" />
     </tr>
   <tr>
   <td>User</td>
   <td style="display:flex">
-    <input type="text" name="username" id="username" #parent_task="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedProject.username" />
+    <input type="text" name="username" id="username" #parent_task="ngModel" disabled="disabled"   class="form-control" [(ngModel)]="tmSvc.selectedProject.username" />
     <input type="hidden" name="user_id" id="user_id" #user_id="ngModel"   [(ngModel)]="this.tmSvc.selectedProject.user_id" />
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myUser">...</button>
   <!-- Model window for Parent><-->
@@ -85,8 +85,8 @@
   </table>
 
   </form>
-  
-  
+ 
+
     
   
   </div>

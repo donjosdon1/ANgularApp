@@ -56,7 +56,7 @@
                 <td>{{obj.parent_task}}</td>
                 <td>{{obj.priority}}</td>
                 <td>{{obj.start_date|date:'MM/dd/yyyy'}}</td>
-                <td>{{obj.end_date|date:'MM/dd/yyyy'}}</td>
+                <td>{{obj.end_date | date:'MM/dd/yyyy'}}</td>
                 
                 <td> <button class="btn btn-primary" id='Edit' [disabled]="checkButtonEnable(obj.taskended)" (click)="EditTask(obj)" >Edit</button> </td>
                 <td> <button class="btn btn-primary" id='EndTask' [disabled]="checkButtonEnable(obj.taskended)"  (click)="EndTask(obj.task_id)" >End Task</button> </td>
@@ -64,4 +64,9 @@
             </tr>            
         </tbody>
 </table>
+<style>
+    thead{
+        background-color: lightblue;
+    }
+    </style>
 </div>

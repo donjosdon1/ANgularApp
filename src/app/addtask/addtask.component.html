@@ -7,8 +7,8 @@ style="width:350px;">
     <td colspan="2" style="text-align: center"><h2>Add Task</h2></td>
 </tr>
 <tr>
-  <td class="form-label">Project</td>
-  <td style="display: flex;"><input type="text" name="project" disabled="disabled" id="project" #project="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedTask.project" />
+  <td class="form-label">Project<span style="color:red;">*</span></td>
+  <td style="display: flex;"><input type="text" name="project" readonly="readonly" id="project" #project="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedTask.project" />
   <input type="hidden" name="project_id" id="project_id" #project_id="ngModel"   [(ngModel)]="this.tmSvc.selectedTask.project_id" />
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myProject">...</button>
 <!-- Model window for Project><-->
@@ -39,7 +39,7 @@ style="width:350px;">
   </td>
 </tr>
   <tr>
-    <td class="form-label">Task</td>
+    <td class="form-label">Task<span style="color:red">*</span></td>
     <td><input type="text" name="task" #task="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedTask.task" />
     <input type="hidden" name="task_id" #task_id="ngModel"   [(ngModel)]="this.tmSvc.selectedTask.task_id" />
     </td>
@@ -58,7 +58,7 @@ style="width:350px;">
           <option value="0"></option>
           <option *ngFor="let ob of taskdata" [value]='ob.task_id'>{{ob.task}}</option>
         </select>  -->
-        <input type="text" name="parent_task" disabled="disabled"  id="parent_task" #parent_task="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedTask.parent_task" />
+        <input type="text" name="parent_task" disabled="disabled"  id="parent_task" #parent_task="ngModel"  class="form-control" [(ngModel)]="tmSvc.selectedTask.parent_task" />
   <input type="hidden" name="parent_id" id="parent_id" #parent_id="ngModel"   [(ngModel)]="this.tmSvc.selectedTask.parent_id" />
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myParent">...</button>
 <!-- Model window for Parent><-->
@@ -91,14 +91,14 @@ style="width:350px;">
   </tr>
   <tr  id="trpriority">
     <td>Priority</td>
-    <td><input type="range" min="0"  name="priority" #priority="ngModel"  required (input)="priority.value" value="15" max="30" class="form-control" 
+    <td><input type="range" min="0"  name="priority" #priority="ngModel"   (input)="priority.value" value="15" max="30" class="form-control" 
       [(ngModel)]="this.tmSvc.selectedTask.priority" /></td>
   </tr>
   <tr  id="trstartdate">
     <td>Start Date</td>
     <td>
         <div class='input-group date' id='datetimepicker1'>
-            <input type='text' data-date-format="dd/mm/yyyy" name="start_date" class="form-control" required [(ngModel)]="tmSvc.selectedTask.start_date" />
+            <input type='date' data-date-format="dd/mm/yyyy" name="start_date" class="form-control"  [(ngModel)]="tmSvc.selectedTask.start_date" />
             <!--<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
             </span>-->
         </div>
@@ -110,13 +110,13 @@ style="width:350px;">
   </tr>
   <tr  id="trenddate">
     <td>End Date</td>
-    <td><input type="text" name="end_date" #end_date="ngModel" required class="form-control" 
+    <td><input type="date" name="end_date" #end_date="ngModel"  class="form-control" 
        [(ngModel)]="tmSvc.selectedTask.end_date"   /></td>
   </tr>
 <tr  id="truser">
 <td>User</td>
 <td style="display: flex;">
-  <input type="text" name="username" id="username" disabled="disabled"  #parent_task="ngModel"  required class="form-control" [(ngModel)]="tmSvc.selectedTask.username" />
+  <input type="text" name="username" id="username" disabled="disabled"  #parent_task="ngModel"   class="form-control" [(ngModel)]="tmSvc.selectedTask.username" />
   <input type="hidden" name="user_id" id="user_id" #user_id="ngModel"   [(ngModel)]="this.tmSvc.selectedTask.user_id" />
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myUser">...</button>
 <!-- Model window for Parent><-->
@@ -158,7 +158,7 @@ style="width:350px;">
     </td>
   </tr>-->
   <tr>
-    <td style="text-align:center" colspan="2"><button class="btn btn-primary"  >Submit</button></td>
+    <td style="text-align:center" colspan="2"><button class="btn btn-primary" [disabled]="!taskForm.form.valid" >Submit</button></td>
   </tr>
 </table>
 <script type="text/javascript">
